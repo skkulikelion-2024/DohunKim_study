@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    const KmToM = () => {
+      const [amount, setAmount] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => {
+        setAmount(0);
+      };
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+      return (
+        <div>
+          <div>
+            <label htmlFor="M">M</label>
+            <input
+              value={flipped ? amount * 1000 : amount}
+              id="M"
+              placeholder="M"
+              type="number"
+              onChange={onChange}
+              disabled={flipped}
+            />
+          </div>
+          <div>
+            <label htmlFor="Km">Km</label>
+            <input
+              value={flipped ? amount : Math.round(amount / 1000)}
+              id="Km"
+              placeholder="Km"
+              type="number"
+              disabled={!flipped}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{flipped ? "Turn Back" : "Invert"}</button>
+        </div>
+      );
+    };
+    const MinutesToHours = () => {
+      const [amount, setAmount] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => {
+        setAmount(0);
+      };
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+      return (
+        <div>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={flipped ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              disabled={flipped}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hour</label>
+            <input
+              value={flipped ? amount : Math.round(amount / 60)}
+              id="hours"
+              placeholder="Hour"
+              type="number"
+              disabled={!flipped}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>{flipped ? "Turn Back" : "Invert"}</button>
+        </div>
+      );
+    };
+    const App = () => {
+      const [index, setIndex] = React.useState("xx");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h1
+            Style={
+              "border-bottom: solid black 1px; margin-bottom: 30px; padding-bottom: 10px"
+            }
+          >
+            Super Converter
+          </h1>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Select your unit</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">KM & Miles</option>
+          </select>
+          {index === "xx" ? (
+            <p>
+              <br />
+              please select your unit
+            </p>
+          ) : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToM /> : null}
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, root);
+
+    /*
+    const App = () => {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        setCounter((current) => current + 1);
+      };
+      return (
+        <div>
+          <h1>Total Clicks : {counter}</h1>
+          <button onClick={onClick}>Click Me!</button>
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, root);
+    */
+  </script>
+</html>

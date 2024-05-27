@@ -1,4 +1,5 @@
 "use client";
+// 서버에서 보낸 후 hydate 진행
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

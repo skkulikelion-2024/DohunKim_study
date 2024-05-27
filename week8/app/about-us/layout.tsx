@@ -1,10 +1,12 @@
-export default function AboutUsLayout({ children }) {
+export default function AboutUsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        &copy; next.js is great
-      </body>
-    </html>
+    <div>
+      {children}
+      &copy; next.js is great
+    </div>
   );
 }
